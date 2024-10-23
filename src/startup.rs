@@ -8,7 +8,6 @@ use crate::routes::{health_check, subscribe};
 
 pub fn run(listener: TcpListener, connection_pool: PgPool) -> Result<Server, std::io::Error> {
     let connection = web::Data::new(connection_pool);
-    // TODO: why is move necessary here?
     let server = HttpServer::new(move || {
         App::new()
             .wrap(TracingLogger::default())
